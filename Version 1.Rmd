@@ -1,0 +1,76 @@
+---
+title: 'Course Project: Regression models'
+author: "Koen Vermeulen"
+date: "5-9-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Management summary
+
+[In this project we will explore some features that affect fuel consumption in miles per gallon (MPG) answering some questions about automatic and manual transmissions (am).
+
+We are looking a dataset of a collection of cars (mtcars -  Motor Trend Car Road Tests), and are interested in exploring the relationship between a set of variables and Miles Per Gallon (MPG).
+
+In particularly we want answer two questions:
+
+- Is an automatic or manual transmission better for MPG?
+- Quantifying how different is the MPG between automatic and manual transmissions?]
+
+## Loading & preparating data
+Load the dataset and convert categorical variables to factors.
+```{r results='hide', message=FALSE}
+library(ggplot2)
+data(mtcars) # loading the data
+head(mtcars, n=5) # first look at the data 
+dim(mtcars) # dimensions are 32 records by 11 variables
+class <- as.data.frame(sapply(mtcars, function(x) class(x)))
+class$unique <- sapply(mtcars, function(x) length(unique(x))); class
+mtcars$cyl <- as.factor(mtcars$cyl); mtcars$vs <- as.factor(mtcars$vs)
+mtcars$am <- factor(mtcars$am); mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb); class[class$unique < 10,]
+levels(mtcars$am) <- c("Auto", "Manual") # for easier analysis
+```
+
+## Exploratory data analysis
+To answer our questions we are initially interested in the relation between the two parameters: transmission (am) and Miles per Gallon (mpg). **Appendix 1** is a boxplot that compares automatic and manual transmission MPG. The graph shows that the miles per gallon is larger for manual than for automatic. But it still is possible that the other variables play a role in the determination of MPG.
+
+
+## Appendices
+
+### Appendix 1
+```{r echo=FALSE}
+  boxplot(mtcars$mpg ~ mtcars$am, 
+          xlab="Transmission Type (0 = Automatic, 1 = Manual)", 
+          ylab="MPG",
+          main="Boxplot: MPG by Transmission Type")
+```
+
+```{r echo=FALSE}
+  boxplot(mtcars$mpg ~ mtcars$gear, 
+          xlab="Gear", 
+          ylab="MPG",
+          main="Boxplot: MPG by gear")
+```
+
+### Appendix 2
+```{r, fig.width = 10, fig.height = 10}
+pairs(mtcars, panel = panel.smooth, main = "Pairs graph on mtcars")
+```
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
