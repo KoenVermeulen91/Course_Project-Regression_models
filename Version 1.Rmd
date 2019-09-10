@@ -38,6 +38,22 @@ levels(mtcars$am) <- c("Auto", "Manual") # for easier analysis
 ## Exploratory data analysis
 To answer our questions we are initially interested in the relation between the two parameters: transmission (am) and Miles per Gallon (mpg). **Appendix 1** is a boxplot that compares automatic and manual transmission MPG. The graph shows that the miles per gallon is larger for manual than for automatic. But it still is possible that the other variables play a role in the determination of MPG.
 
+**Appendix 2** is a pairs graph that shows that MPG has correlations with other variables than just **am**. To obtain a more accurate model, we need to predict MPG with more variables than **am** alone.
+
+## Statistical inference
+[Text]
+t.test
+
+## Regression analysis
+
+Lets run some tests to compare the MPG with correlate variables.
+
+
+
+
+
+
+
 
 ## Appendices
 
@@ -47,13 +63,6 @@ To answer our questions we are initially interested in the relation between the 
           xlab="Transmission Type (0 = Automatic, 1 = Manual)", 
           ylab="MPG",
           main="Boxplot: MPG by Transmission Type")
-```
-
-```{r echo=FALSE}
-  boxplot(mtcars$mpg ~ mtcars$gear, 
-          xlab="Gear", 
-          ylab="MPG",
-          main="Boxplot: MPG by gear")
 ```
 
 ### Appendix 2
